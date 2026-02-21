@@ -34,7 +34,7 @@
 
 /* Manchester United - Red */
 .team-card[data-team="manchester-united"] {
-  --team-color: #DA020E;
+  --team-color: #f40612;
   border-left: 4px solid var(--team-color);
 }
 
@@ -64,7 +64,7 @@
 
 /* Baltimore Ravens - Purple */
 .team-card[data-team="baltimore-ravens"] {
-  --team-color: #241773;
+  --team-color: #1b1064;
   border-left: 4px solid var(--team-color);
 }
 

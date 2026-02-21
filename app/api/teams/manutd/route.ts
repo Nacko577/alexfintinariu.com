@@ -17,12 +17,12 @@ export async function GET() {
   try {
     console.log('Fetching data from football-data.org...');
     const [matchesRes, standingsRes] = await Promise.all([
-      fetch('https://api.football-data.org/v4/teams/66/matches?competitions=PL&limit=20', {
+      fetch('https://api.football-data.org/v4/teams/66/matches?competitions=PL&limit=38', {
         headers: {
           'X-Auth-Token': apiKey,
         },
       }),
-      fetch('https://api.football-data.org/v4/competitions/PL/standings', {
+      fetch('https://api.football-data.org/v4/competitions/PL/standings?season=2025', {
         headers: {
           'X-Auth-Token': apiKey,
         },

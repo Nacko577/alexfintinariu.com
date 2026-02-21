@@ -14,7 +14,7 @@ export async function loadManchesterUnited(): Promise<TeamData> {
   try {
     // Call our API route (server-side proxy on Vercel)
     console.log('Fetching Manchester United data from API route...');
-    const response = await fetch('/api/teams/manutd');
+    const response = await fetch(`/api/teams/manutd?t=${Date.now()}`, { cache: 'no-store' });
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
@@ -97,21 +97,52 @@ export async function loadBaltimoreOrioles(): Promise<TeamData> {
 export async function loadBaltimoreRavens(): Promise<TeamData> {
   // Mock data - replace with actual API call when NFL API key is available
   return {
-    record: '11-4',
-    standing: '1st in AFC North',
-    lastResult: 'Ravens 33-19 49ers',
-    nextFixture: 'vs Dolphins (Sun, 1:00 PM)',
+    record: '8-9',
+    standing: '2nd in AFC North',
+    lastResult: 'Ravens 26-24 Steelers',
+    nextFixture: 'Season ended - see you next year!',
   };
 }
 
 // LA Lakers (NBA)
 export async function loadLakers(): Promise<TeamData> {
-  // Mock data - replace with actual API call when NBA API key is available
+  const response = await fetch(`/api/teams/lakers?t=${Date.now()}`, { cache: "no-store" });
+
+  if (!response.ok) {
+    const err = await response.json().catch(() => ({ error: "Unknown error" }));
+    throw new Error(err.error || `API error: ${response.status}`);
+  }
+
+  const data = await response.json();
+
+  const last = data.lastGame;
+  const next = data.nextGame;
+
+  const lastResult = last
+    ? `${last.awayTeam} ${last.awayScore}-${last.homeScore} ${last.homeTeam}`
+    : "No recent result";
+
+  const nextFixture = next
+    ? (() => {
+        const dt = new Date(next.date);
+        const dateStr = dt.toLocaleDateString("en-US", {
+          weekday: "short",
+          month: "short",
+          day: "numeric",
+        });
+        const opponent = next.homeAbbr === "LAL" ? next.awayTeam : next.homeTeam;
+        return `vs ${opponent} (${dateStr})`;
+      })()
+    : "No upcoming match";
+
+  const standing =
+    data.confRank != null ? `${data.confRank}${getOrdinalSuffix(Number(data.confRank))} in West` : "N/A";
+
   return {
-    record: '24-19',
-    standing: '8th in West',
-    lastResult: 'Lakers 112-105 Thunder',
-    nextFixture: 'vs Celtics (Mon, 7:30 PM)',
+    record: data.record ?? "N/A",
+    standing,
+    lastResult,
+    nextFixture,
   };
 }
 

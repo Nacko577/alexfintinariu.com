@@ -1,8 +1,3 @@
-/* ============================================
-   Modern Portfolio Website Styles
-   ============================================ */
-
-/* CSS Variables */
 :root {
   /* Light Theme Colors */
   --bg-primary: #ffffff;
@@ -298,12 +293,12 @@ body > * {
   transition: filter 0.3s ease;
 }
 
-/* Keep logos as dark in light mode (no filter - logos are already dark) */
-body:not([data-theme="dark"]) .social-icon-img {
-  filter: none;
+/* Make logos black in light mode */
+body:not([data-theme="light"]) .social-icon-img {
+  filter: brightness(0);
 }
 
-/* Invert dark logos to white in dark mode for visibility */
+/* Make logos white/light gray in dark mode - invert black to white */
 [data-theme="dark"] .social-icon-img {
   filter: brightness(0) invert(1);
 }

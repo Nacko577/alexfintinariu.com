@@ -84,23 +84,79 @@ export async function loadManchesterUnited(): Promise<TeamData> {
 
 // Baltimore Orioles (MLB)
 export async function loadBaltimoreOrioles(): Promise<TeamData> {
-  // Mock data - replace with actual API call when MLB API key is available
+  const response = await fetch(`/api/teams/orioles?t=${Date.now()}`, { cache: "no-store" });
+
+  if (!response.ok) {
+    const err = await response.json().catch(() => ({ error: "Unknown error" }));
+    throw new Error(err.error || `API error: ${response.status}`);
+  }
+
+  const data = await response.json();
+  const last = data.lastGame;
+  const next = data.nextGame;
+
+  const lastResult = last
+    ? `${last.awayTeam} ${last.awayScore}-${last.homeScore} ${last.homeTeam}`
+    : "No recent result";
+
+  const nextFixture = next
+    ? (() => {
+        const dt = new Date(next.date);
+        const dateStr = dt.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
+        const opponent = next.homeAbbr === "BAL" ? next.awayTeam : next.homeTeam;
+        return `vs ${opponent} (${dateStr})`;
+      })()
+    : "No upcoming game";
+
+  const standing =
+    data.divisionRank != null && data.groupName
+      ? `${data.divisionRank}${getOrdinalSuffix(Number(data.divisionRank))} in ${data.groupName}`
+      : "N/A";
+
   return {
-    record: '87-54',
-    standing: '1st in AL East',
-    lastResult: 'Orioles 5-3 Yankees',
-    nextFixture: 'vs Red Sox (Fri, 7:05 PM)',
+    record: data.record ?? "N/A",
+    standing,
+    lastResult,
+    nextFixture,
   };
 }
 
 // Baltimore Ravens (NFL)
 export async function loadBaltimoreRavens(): Promise<TeamData> {
-  // Mock data - replace with actual API call when NFL API key is available
+  const response = await fetch(`/api/teams/ravens?t=${Date.now()}`, { cache: "no-store" });
+
+  if (!response.ok) {
+    const err = await response.json().catch(() => ({ error: "Unknown error" }));
+    throw new Error(err.error || `API error: ${response.status}`);
+  }
+
+  const data = await response.json();
+  const last = data.lastGame;
+  const next = data.nextGame;
+
+  const lastResult = last
+    ? `${last.awayTeam} ${last.awayScore}-${last.homeScore} ${last.homeTeam}`
+    : "No recent result";
+
+  const nextFixture = next
+    ? (() => {
+        const dt = new Date(next.date);
+        const dateStr = dt.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
+        const opponent = next.homeAbbr === "BAL" ? next.awayTeam : next.homeTeam;
+        return `vs ${opponent} (${dateStr})`;
+      })()
+    : "No upcoming game";
+
+  const standing =
+    data.divisionRank != null && data.groupName
+      ? `${data.divisionRank}${getOrdinalSuffix(Number(data.divisionRank))} in ${data.groupName}`
+      : "N/A";
+
   return {
-    record: '8-9',
-    standing: '2nd in AFC North',
-    lastResult: 'Ravens 26-24 Steelers',
-    nextFixture: 'Season ended - see you next year!',
+    record: data.record ?? "N/A",
+    standing,
+    lastResult,
+    nextFixture,
   };
 }
 

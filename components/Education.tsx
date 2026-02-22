@@ -7,14 +7,7 @@ export default function Education() {
       field: 'Field of Study: Computer Science and Mathematics',
       period: 'Years: 2020 - 2024',
       description: 'Relevent coursework: Data Structures and Algorithms, Databases, Operating Systems, Software Engineering, Artificial Intelligence, Object-Oriented Programming',
-    },
-    {
-      icon: '📜',
-      degree: 'Cambridge English Advanced (C2 Proficiency)',
-      school: 'Institution',
-      period: 'Year: 2020',
-      description: '-',
-    },
+    }
   ];
 
   return (

@@ -14,7 +14,7 @@ interface TeamCardProps {
     nextFixture: string;
     points?: string;
   };
-  loading?: boolean;
+  loading?: boolean;  
 }
 
 export default function TeamCard({ teamId, name, league, icon, data, loading }: TeamCardProps) {

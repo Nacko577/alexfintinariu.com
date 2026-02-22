@@ -6,24 +6,21 @@ import { usePathname } from 'next/navigation';
 
 export default function Header() {
   const pathname = usePathname();
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const [theme, setTheme] = useState<'light' | 'dark'>('dark');
   const [mounted, setMounted] = useState(false);
+
+  const applyTheme = (newTheme: 'light' | 'dark') => {
+    document.documentElement.setAttribute('data-theme', newTheme);
+  };
 
   useEffect(() => {
     setMounted(true);
-    const saved = localStorage.getItem('theme') || 
-      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    setTheme(saved as 'light' | 'dark');
-    applyTheme(saved as 'light' | 'dark');
-  }, []);
 
-  const applyTheme = (newTheme: 'light' | 'dark') => {
-    if (newTheme === 'dark') {
-      document.documentElement.setAttribute('data-theme', 'dark');
-    } else {
-      document.documentElement.removeAttribute('data-theme');
-    }
-  };
+    const saved = localStorage.getItem('theme') as 'light' | 'dark' | null;
+    const initialTheme = saved ?? 'dark'; // ✅ default dark
+    setTheme(initialTheme);
+    applyTheme(initialTheme);
+  }, []);
 
   const toggleTheme = () => {
     const newTheme = theme === 'dark' ? 'light' : 'dark';
@@ -32,9 +29,7 @@ export default function Header() {
     localStorage.setItem('theme', newTheme);
   };
 
-  if (!mounted) {
-    return null;
-  }
+  if (!mounted) return null;
 
   return (
     <header className="site-header">
@@ -47,12 +42,14 @@ export default function Header() {
             Teams
           </Link>
         </nav>
+
         <button
           id="theme-toggle"
           className="theme-toggle"
           onClick={toggleTheme}
           aria-pressed={theme === 'dark'}
-          aria-label="Toggle dark mode"
+          aria-label="Toggle theme"
+          title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
         >
           <span className="theme-icon">{theme === 'dark' ? '☀️' : '🌙'}</span>
         </button>

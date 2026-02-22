@@ -6,8 +6,9 @@ export default function Education() {
       school: 'Babeș-Bolyai University',
       field: 'Field of Study: Computer Science and Mathematics',
       period: 'Years: 2020 - 2024',
-      description: 'Relevent coursework: Data Structures and Algorithms, Databases, Operating Systems, Software Engineering, Artificial Intelligence, Object-Oriented Programming',
-    }
+      description:
+        'Relevant coursework: Data Structures and Algorithms, Databases, Operating Systems, Software Engineering, Artificial Intelligence, Object-Oriented Programming',
+    },
   ];
 
   return (
@@ -19,18 +20,20 @@ export default function Education() {
 
         <div className="education-timeline">
           {education.map((item, index) => (
-            <article key={index} className="education-card">
+            <article key={index} className="education-card card-hover">
               <div className="education-icon">{item.icon}</div>
+
               <div className="education-content">
                 <h3 className="education-degree">{item.degree}</h3>
                 <p className="education-school">{item.school}</p>
+
                 <div className="education-details">
-                  {item.field && (
-                    <span className="education-field">{item.field}</span>
-                  )}
+                  <span className="education-field">{item.field}</span>
+                  <span className="education-sep">•</span>
                   <span className="education-period">{item.period}</span>
                 </div>
-                <p className="education-description">{item.description}</p>
+
+                <p className="education-description text-measure">{item.description}</p>
               </div>
             </article>
           ))}

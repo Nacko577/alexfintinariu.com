@@ -1,16 +1,22 @@
-import type { Metadata } from 'next';
-import '../styles/globals.css';
-import '../styles/teams.css';
+import type { Metadata } from "next";
+import { GeistSans } from "geist/font/sans";
+import "../styles/globals.css";
 
 export const metadata: Metadata = {
-  title: 'fîntînariu alexandru',
-  description: 'Personal portfolio website',
+  title: "Alexandru Fîntînariu",
+  description: "Full-stack developer building reliable systems.",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en" data-theme="dark">
-      <body>{children}</body>
+      <body className={`${GeistSans.className} antialiased`}>
+        {children}
+      </body>
     </html>
   );
 }

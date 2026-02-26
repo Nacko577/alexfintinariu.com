@@ -71,7 +71,7 @@ export default function Hero() {
 
             {/* NEW: Resume icon link (swap the png later) */}
             <a
-              href="/Resume.pdf"
+              href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="social-link"

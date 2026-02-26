@@ -45,13 +45,18 @@ export default function Header() {
 
         <button
           id="theme-toggle"
-          className="theme-toggle"
+          className={`theme-toggle ${theme === 'dark' ? 'theme-toggle-dark' : 'theme-toggle-light'}`}
           onClick={toggleTheme}
           aria-pressed={theme === 'dark'}
           aria-label="Toggle theme"
           title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+          role="switch"
         >
-          <span className="theme-icon">{theme === 'dark' ? '☀️' : '🌙'}</span>
+          <span className="theme-toggle-track">
+            <span className="theme-toggle-thumb">
+              <span className="theme-icon">{theme === 'dark' ? '🌙' : '☀️'}</span>
+            </span>
+          </span>
         </button>
       </div>
     </header>

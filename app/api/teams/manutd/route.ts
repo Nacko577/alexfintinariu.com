@@ -3,9 +3,6 @@ import { NextResponse } from 'next/server';
 export async function GET() {
   const apiKey = process.env.FOOTBALL_API_KEY;
 
-  console.log('API Route called - FOOTBALL_API_KEY exists:', !!apiKey);
-  console.log('API Key length:', apiKey?.length || 0);
-
   if (!apiKey) {
     console.error('❌ FOOTBALL_API_KEY not configured in environment variables');
     return NextResponse.json(
@@ -15,7 +12,6 @@ export async function GET() {
   }
 
   try {
-    console.log('Fetching data from football-data.org...');
     const [matchesRes, standingsRes] = await Promise.all([
       fetch('https://api.football-data.org/v4/teams/66/matches?competitions=PL&limit=38', {
         headers: {
@@ -28,9 +24,6 @@ export async function GET() {
         },
       }),
     ]);
-
-    console.log('Matches API status:', matchesRes.status);
-    console.log('Standings API status:', standingsRes.status);
 
     if (!matchesRes.ok) {
       const errorText = await matchesRes.text();
@@ -51,7 +44,6 @@ export async function GET() {
       console.warn('Standings API error (non-fatal):', standingsRes.status, errorText);
     }
 
-    console.log('✅ Successfully fetched data - matches:', matchesData.matches?.length || 0);
     return NextResponse.json({
       matches: matchesData,
       standings: standingsData,

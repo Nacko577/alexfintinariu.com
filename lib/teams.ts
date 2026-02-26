@@ -7,13 +7,14 @@ export interface TeamData {
   lastResult: string;
   nextFixture: string;
   points?: string; // Optional points field for leagues that use points
+  winRate?: number; // Win percentage (0-100)
+  trend?: 'up' | 'down' | 'neutral'; // Recent form trend
 }
 
 // Manchester United (Premier League)
 export async function loadManchesterUnited(): Promise<TeamData> {
   try {
     // Call our API route (server-side proxy on Vercel)
-    console.log('Fetching Manchester United data from API route...');
     const response = await fetch(`/api/teams/manutd?t=${Date.now()}`, { cache: 'no-store' });
 
     if (!response.ok) {
@@ -23,13 +24,8 @@ export async function loadManchesterUnited(): Promise<TeamData> {
     }
 
     const data = await response.json();
-    console.log('API response received:', data);
     const matches = data.matches?.matches || [];
     const standingsData = data.standings;
-    
-    if (!matches || matches.length === 0) {
-      console.warn('No matches found in API response');
-    }
 
     const finished = matches
       .filter((m: any) => m.status === 'FINISHED')
@@ -63,12 +59,42 @@ export async function loadManchesterUnited(): Promise<TeamData> {
       }
     }
 
+    // Calculate win rate and trend for Man Utd
+    let winRate: number | undefined;
+    let trend: 'up' | 'down' | 'neutral' | undefined;
+
+    if (standingsData) {
+      const teamStanding2 = standingsData.standings?.[0]?.table?.find((t: any) => t.team.id === 66);
+      if (teamStanding2) {
+        const totalGames = teamStanding2.won + teamStanding2.draw + teamStanding2.lost;
+        if (totalGames > 0) {
+          winRate = Math.round((teamStanding2.won / totalGames) * 100);
+        }
+      }
+    }
+
+    // Determine trend from last match
+    if (lastMatch) {
+      const homeScore = lastMatch.score.fullTime.home;
+      const awayScore = lastMatch.score.fullTime.away;
+      const isHome = lastMatch.homeTeam.id === 66;
+      if (homeScore === awayScore) {
+        trend = 'neutral';
+      } else if ((isHome && homeScore > awayScore) || (!isHome && awayScore > homeScore)) {
+        trend = 'up';
+      } else {
+        trend = 'down';
+      }
+    }
+
     return {
       record,
       standing,
       lastResult,
       nextFixture,
       points,
+      winRate,
+      trend,
     };
   } catch (error: any) {
     console.error('❌ Error loading Manchester United data:', error);
@@ -113,11 +139,39 @@ export async function loadBaltimoreOrioles(): Promise<TeamData> {
       ? `${data.divisionRank}${getOrdinalSuffix(Number(data.divisionRank))} in ${data.groupName}`
       : "N/A";
 
+  // Calculate win rate and trend
+  let winRate: number | undefined;
+  let trend: 'up' | 'down' | 'neutral' | undefined;
+
+  if (data.record && data.record !== 'N/A') {
+    const parts = data.record.split('-').map(Number);
+    if (parts.length >= 2) {
+      const wins = parts[0];
+      const losses = parts[1];
+      const total = wins + losses;
+      if (total > 0) winRate = Math.round((wins / total) * 100);
+    }
+  }
+
+  if (last) {
+    const homeWon = last.homeScore > last.awayScore;
+    const isHome = last.homeAbbr === 'BAL';
+    if (last.homeScore === last.awayScore) {
+      trend = 'neutral';
+    } else if ((isHome && homeWon) || (!isHome && !homeWon)) {
+      trend = 'up';
+    } else {
+      trend = 'down';
+    }
+  }
+
   return {
     record: data.record ?? "N/A",
     standing,
     lastResult,
     nextFixture,
+    winRate,
+    trend,
   };
 }
 
@@ -152,11 +206,39 @@ export async function loadBaltimoreRavens(): Promise<TeamData> {
       ? `${data.divisionRank}${getOrdinalSuffix(Number(data.divisionRank))} in ${data.groupName}`
       : "N/A";
 
+  // Calculate win rate and trend
+  let winRate: number | undefined;
+  let trend: 'up' | 'down' | 'neutral' | undefined;
+
+  if (data.record && data.record !== 'N/A') {
+    const parts = data.record.split('-').map(Number);
+    if (parts.length >= 2) {
+      const wins = parts[0];
+      const losses = parts[1];
+      const total = wins + losses;
+      if (total > 0) winRate = Math.round((wins / total) * 100);
+    }
+  }
+
+  if (last) {
+    const homeWon = last.homeScore > last.awayScore;
+    const isHome = last.homeAbbr === 'BAL';
+    if (last.homeScore === last.awayScore) {
+      trend = 'neutral';
+    } else if ((isHome && homeWon) || (!isHome && !homeWon)) {
+      trend = 'up';
+    } else {
+      trend = 'down';
+    }
+  }
+
   return {
     record: data.record ?? "N/A",
     standing,
     lastResult,
     nextFixture,
+    winRate,
+    trend,
   };
 }
 
@@ -194,11 +276,39 @@ export async function loadLakers(): Promise<TeamData> {
   const standing =
     data.confRank != null ? `${data.confRank}${getOrdinalSuffix(Number(data.confRank))} in West` : "N/A";
 
+  // Calculate win rate and trend
+  let winRate: number | undefined;
+  let trend: 'up' | 'down' | 'neutral' | undefined;
+
+  if (data.record && data.record !== 'N/A') {
+    const parts = data.record.split('-').map(Number);
+    if (parts.length >= 2) {
+      const wins = parts[0];
+      const losses = parts[1];
+      const total = wins + losses;
+      if (total > 0) winRate = Math.round((wins / total) * 100);
+    }
+  }
+
+  if (last) {
+    const homeWon = last.homeScore > last.awayScore;
+    const isHome = last.homeAbbr === 'LAL';
+    if (last.homeScore === last.awayScore) {
+      trend = 'neutral';
+    } else if ((isHome && homeWon) || (!isHome && !homeWon)) {
+      trend = 'up';
+    } else {
+      trend = 'down';
+    }
+  }
+
   return {
     record: data.record ?? "N/A",
     standing,
     lastResult,
     nextFixture,
+    winRate,
+    trend,
   };
 }
 

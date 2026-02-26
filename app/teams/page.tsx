@@ -140,7 +140,7 @@ export default function TeamsPage() {
       <main>
         <section className="teams-section">
           <div className="container">
-            <div className="section-header">
+            <div className="teams-page-header">
               <h1 className="section-title">My Teams</h1>
               <p className="section-subtitle">Schedules, standings, and latest results across all your favorite sports</p>
             </div>

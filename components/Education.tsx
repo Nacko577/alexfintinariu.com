@@ -1,11 +1,11 @@
 export default function Education() {
   const education = [
     {
-      icon: '🎓',
+      icon: 'grad-cap',
       degree: 'Computer Science and Mathematics BSc',
       school: 'Babeș-Bolyai University',
-      field: 'Field of Study: Computer Science and Mathematics',
-      period: 'Years: 2020 - 2024',
+      field: 'Computer Science and Mathematics',
+      period: '2020 - 2024',
       description:
         'Relevant coursework: Data Structures and Algorithms, Databases, Operating Systems, Software Engineering, Artificial Intelligence, Object-Oriented Programming',
     },
@@ -21,7 +21,12 @@ export default function Education() {
         <div className="education-timeline">
           {education.map((item, index) => (
             <article key={index} className="education-card card-hover">
-              <div className="education-icon">{item.icon}</div>
+              <div className="education-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                  <path d="M6 12v5c0 1.1 2.7 3 6 3s6-1.9 6-3v-5" />
+                </svg>
+              </div>
 
               <div className="education-content">
                 <h3 className="education-degree">{item.degree}</h3>

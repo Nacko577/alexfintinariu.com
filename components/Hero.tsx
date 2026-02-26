@@ -14,76 +14,33 @@ export default function Hero() {
           </p>
 
           <div className="social-links">
-            <a
-              href="https://www.linkedin.com/in/alex-fintinariu/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="social-link"
-              aria-label="LinkedIn"
-            >
-              <Image src="/linkedin.png" alt="LinkedIn" width={32} height={32} className="social-icon social-icon-img" />
+            <a href="https://www.linkedin.com/in/alex-fintinariu/" target="_blank" rel="noopener noreferrer" className="social-link" aria-label="LinkedIn">
+              <Image src="/linkedin.png" alt="" width={18} height={18} className="social-icon-img" />
               <span className="social-label">LinkedIn</span>
             </a>
 
-            <a
-              href="https://github.com/Nacko577"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="social-link"
-              aria-label="GitHub"
-            >
-              <Image src="/github.png" alt="GitHub" width={32} height={32} className="social-icon social-icon-img" />
+            <a href="https://github.com/Nacko577" target="_blank" rel="noopener noreferrer" className="social-link" aria-label="GitHub">
+              <Image src="/github.png" alt="" width={18} height={18} className="social-icon-img" />
               <span className="social-label">GitHub</span>
             </a>
 
-            <a
-              href="https://www.instagram.com/alexfintinariu/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="social-link"
-              aria-label="Instagram"
-            >
-              <Image src="/instagram.png" alt="Instagram" width={32} height={32} className="social-icon social-icon-img" />
+            <a href="https://www.instagram.com/alexfintinariu/" target="_blank" rel="noopener noreferrer" className="social-link" aria-label="Instagram">
+              <Image src="/instagram.png" alt="" width={18} height={18} className="social-icon-img" />
               <span className="social-label">Instagram</span>
             </a>
 
-            <a
-              href="https://www.facebook.com/alex.fintinariu/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="social-link"
-              aria-label="Facebook"
-            >
-              <Image src="/facebook.png" alt="Facebook" width={32} height={32} className="social-icon social-icon-img" />
+            <a href="https://www.facebook.com/alex.fintinariu/" target="_blank" rel="noopener noreferrer" className="social-link" aria-label="Facebook">
+              <Image src="/facebook.png" alt="" width={18} height={18} className="social-icon-img" />
               <span className="social-label">Facebook</span>
             </a>
 
-            <a
-              href="https://open.spotify.com/user/21notoxgpmsnmb5hffi32k2mq?si=600e970f8ebe4d15"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="social-link"
-              aria-label="Spotify"
-            >
-              <Image src="/spotify.png" alt="Spotify" width={32} height={32} className="social-icon social-icon-img" />
+            <a href="https://open.spotify.com/user/21notoxgpmsnmb5hffi32k2mq?si=600e970f8ebe4d15" target="_blank" rel="noopener noreferrer" className="social-link" aria-label="Spotify">
+              <Image src="/spotify.png" alt="" width={18} height={18} className="social-icon-img" />
               <span className="social-label">Spotify</span>
             </a>
 
-            {/* NEW: Resume icon link (swap the png later) */}
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="social-link"
-              aria-label="Resume"
-            >
-              <Image
-                src="/resume.png"
-                alt="Resume"
-                width={32}
-                height={32}
-                className="social-icon social-icon-img"
-              />
+            <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="social-link" aria-label="Resume">
+              <Image src="/resume.png" alt="" width={18} height={18} className="social-icon-img" />
               <span className="social-label">Resume</span>
             </a>
           </div>

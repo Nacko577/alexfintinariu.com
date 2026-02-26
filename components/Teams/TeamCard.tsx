@@ -102,8 +102,10 @@ export default function TeamCard({ teamId, name, league, leagueSub, icon, data, 
             <Image
               src={icon}
               alt={`${name} logo`}
-              width={52}
-              height={52}
+              width={104}
+              height={104}
+              quality={100}
+              unoptimized
               className="team-icon-img"
             />
           )}

@@ -25,11 +25,11 @@ export default function Experience() {
           {experience.map((item, idx) => (
             <article key={idx} className="experience-card card-hover">
               <div className="experience-top">
-                <div>
+                <span className="date-pill">{item.period}</span>
+                <div className="experience-info">
                   <h3 className="experience-role">{item.role}</h3>
                   <p className="experience-company">{item.company}</p>
                 </div>
-                <span className="experience-period">{item.period}</span>
               </div>
 
               <ul className="experience-bullets">

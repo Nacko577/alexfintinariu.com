@@ -34,6 +34,8 @@ export default function Header() {
   return (
     <header className="site-header">
       <div className="container">
+        <Link href="/" className="site-title">alex.</Link>
+
         <nav className="main-nav">
           <Link href="/" className={`nav-link ${pathname === '/' ? 'active' : ''}`}>
             Home

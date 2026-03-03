@@ -563,13 +563,16 @@ html[data-theme="dark"] .site-header .container {
   flex-shrink: 0;
   transform: translateZ(0);
   image-rendering: -webkit-optimize-contrast;
+  /* Default to dark mode (white icons) */
+  filter: brightness(0) invert(1);
 }
 
 html[data-theme="light"] .social-icon-img {
   filter: brightness(0);
 }
 
-html[data-theme="dark"] .social-icon-img {
+html[data-theme="dark"] .social-icon-img,
+html:not([data-theme]) .social-icon-img {
   filter: brightness(0) invert(1);
 }
 
@@ -1035,5 +1038,11 @@ a.project-card {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+  }
+
+  body,
+  body::before,
+  body::after {
+    animation: none !important;
   }
 }

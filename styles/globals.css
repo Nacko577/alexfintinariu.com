@@ -564,16 +564,16 @@ html[data-theme="dark"] .site-header .container {
   transform: translateZ(0);
   image-rendering: -webkit-optimize-contrast;
   /* Default to dark mode (white icons) */
-  filter: brightness(0) invert(1);
+  filter: brightness(0) invert(1) !important;
 }
 
 html[data-theme="light"] .social-icon-img {
-  filter: brightness(0);
+  filter: brightness(0) !important;
 }
 
 html[data-theme="dark"] .social-icon-img,
 html:not([data-theme]) .social-icon-img {
-  filter: brightness(0) invert(1);
+  filter: brightness(0) invert(1) !important;
 }
 
 .social-label {

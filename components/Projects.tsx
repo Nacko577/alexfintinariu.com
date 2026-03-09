@@ -3,7 +3,7 @@ export default function Projects() {
     {
       title: "Suceava Live Bus Map",
       date: "Jan. 2025",
-      url: "suceavabuses.vercel.app",
+      url: "https://suceavabuses.vercel.app",
       description:
         "Real-time bus tracking and route planner with interactive maps, live GPS ingestion, route generation, and a transfer-aware trip planner.",
       tech: ["TypeScript", "Next.js", "React", "Leaflet", "Node.js"],

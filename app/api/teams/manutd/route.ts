@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   const apiKey = process.env.FOOTBALL_API_KEY;
 
@@ -13,15 +15,17 @@ export async function GET() {
 
   try {
     const [matchesRes, standingsRes] = await Promise.all([
-      fetch('https://api.football-data.org/v4/teams/66/matches?competitions=PL&limit=38', {
+      fetch('https://api.football-data.org/v4/teams/66/matches?competitions=PL&season=2025&limit=38', {
         headers: {
           'X-Auth-Token': apiKey,
         },
+        cache: 'no-store',
       }),
       fetch('https://api.football-data.org/v4/competitions/PL/standings?season=2025', {
         headers: {
           'X-Auth-Token': apiKey,
         },
+        cache: 'no-store',
       }),
     ]);
 

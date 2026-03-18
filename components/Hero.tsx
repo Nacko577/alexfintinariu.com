@@ -9,8 +9,8 @@ export default function Hero() {
             Hi, I'm <span className="gradient-text">Alex.</span>
           </h1>
           <p className="hero-description">
-            I'm a computer science student passionate about building useful software
-            and learning industry best practices. Welcome to my portfolio.
+            I'm a computer science graduate passionate about building software
+            and learning. Welcome to my portfolio.
           </p>
 
           <div className="social-links">

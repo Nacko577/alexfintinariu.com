@@ -9,12 +9,12 @@ export default function Projects() {
       tech: ["TypeScript", "Next.js", "React", "Leaflet", "Node.js"],
     },
     {
-      title: "Spotify Artist Data Fetcher",
-      date: "Sep. 2024",
-      url: "https://music.eduardlupu.com/",
+      title: "LinguaChat",
+      date: "Feb. 2026",
+      url: "https://linguachat.navitech.cloud/",
       description:
-        "Spotify artists data visualization tool that fetches real-time metrics (listeners, followers, top locations) and presents them in a clean UI.",
-      tech: ["JavaScript", "TypeScript", "Python", "Git"],
+        "Real-time multilingual chat platform with private messaging, automatic translation, and encrypted conversations across Android and web.",
+      tech: ["Jetpack Compose", "TypeScript", "SvelteKit", "Git"],
     },
     {
       title: "Box Ninja",

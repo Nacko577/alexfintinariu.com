@@ -17,6 +17,14 @@ export default function Projects() {
       tech: ["Jetpack Compose", "TypeScript", "SvelteKit", "Git"],
     },
     {
+      title: "Cabo Card Game",
+      date: "Apr. 2026",
+      url: "https://github.com/Nacko577",
+      description:
+        "Native iOS and Android multiplayer card game with online WebSocket play, same-network discovery (Bonjour / NSD), and a JSON wire protocol so cross-platform players can join the same session.",
+      tech: ["Swift", "Kotlin", "WebSockets"],
+    },
+    {
       title: "Box Ninja",
       date: "Jan. 2023",
       url: "https://github.com/Nacko577/BoxNinja",
